@@ -1,9 +1,11 @@
+INCREMENT_CONST = 5
+FROM_TEN_TO_HUNDRED = (10..100)
+
 class Increments
-  INCREMENT_CONST = 5
   
     def create_array
       array = []
-      (10..100).step(INCREMENT_CONST) do |i|
+      FROM_TEN_TO_HUNDRED.step(INCREMENT_CONST) do |i|
         array << i
       end
       array
