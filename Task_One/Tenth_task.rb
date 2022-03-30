@@ -29,7 +29,7 @@ class Purchase
     end
   end
 
-  def get_amount
+  def product_quantity
     @amount.each { |key, value| 
       if value == ZERO  
         "no product" 
@@ -38,7 +38,7 @@ class Purchase
       end}
   end
 
-  def get_amount_sum
+  def price_sum
     if @amount.values.sum == ZERO
       "empty cart"
     else
@@ -52,5 +52,5 @@ prc = Purchase.new
 
 prc.add_in_cart
 prc.create_amount
-prc.get_amount
-puts prc.get_amount_sum
+prc.product_quantity
+puts prc.price_sum
