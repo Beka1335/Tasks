@@ -1,7 +1,8 @@
 require 'date'
+CONST = -1
 
 class Year
-  CONST = -1
+ 
   def initialize(year)
     @year = year
     @year_hash = {}
