@@ -1,5 +1,6 @@
+TWO_DEGREES = 2
+
 class Triangle 
-  TWO_DEGREES = 2
 
   def sides(side_one, side_two, side_three)
     @side_one, @side_two, @side_three = [side_one, side_two, side_three].sort 
