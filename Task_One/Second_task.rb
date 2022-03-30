@@ -1,6 +1,6 @@
-class Triangle
+AREA = 2
 
-  AREA = 2
+class Triangle
 
   def area(base, height)
     puts (base * height) / AREA
