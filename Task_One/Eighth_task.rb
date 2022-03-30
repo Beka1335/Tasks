@@ -1,6 +1,7 @@
+CONT = 96
+VOUEL = "aeiou"
+
 class Letters
-  CONT = 96
-  VOUEL = "aeiou"
 
   def initialize 
     @vowel = {}
