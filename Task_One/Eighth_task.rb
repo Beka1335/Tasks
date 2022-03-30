@@ -3,14 +3,14 @@ class Letters
   VOUEL = "aeiou"
 
   def initialize 
-    vowel = {}
+    @vowel = {}
   end
 
   def create_vowel
     VOUEL.each_char do |i|
-      vowel[i] = i.ord - CONT
+      @vowel[i] = i.ord - CONT
     end
-    vowel
+    @vowel
   end
 end
 
