@@ -50,7 +50,7 @@ class Triangle
 end
 
  side_one = gets.chomp.to_f
- side_two = gets.chomp.to_f
+ side_two = gets.chomp.to_fm
  side_three = gets.chomp.to_f
  
  puts Triangle.new.sides(side_one, side_two, side_three)
