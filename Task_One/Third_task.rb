@@ -10,6 +10,8 @@ class Triangle
 
   def triangle_types 
   case 
+  when is_triangle? 
+    'The is not a Triangle'
   when is_phitagorean? && is_isosceles? 
     'The Triangle is Rectungular and isosceles' 
   when is_equilateral? && is_isosceles? 
@@ -17,16 +19,14 @@ class Triangle
   when is_isosceles? 
     'The Triangle is isosceles' 
   when is_phitagorean? 
-    'The Triangle is Rectungular' 
-  when is_triangle? 
-    'The is just Triangle' 
+    'The Triangle is Rectungular'  
   else 
-    'The is not a Triangle' 
+    'The is just Triangle'
     end 
   end
 
   def is_triangle? 
-    @side_one + @side_two > @side_three && @side_one + @side_three > @side_two && @side_two + @side_three > @side_one 
+    @side_one + @side_two < @side_three
   end
  
   def is_phitagorean?
