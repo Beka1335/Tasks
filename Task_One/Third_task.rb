@@ -2,8 +2,8 @@ TWO_DEGREES = 2
 
 class Triangle 
 
-  def sides(side_one, side_two, side_three)
-    @side_one, @side_two, @side_three = [side_one, side_two, side_three].sort 
+  def sides(first, second, third)
+    @first, @second, @third = [first, second, third].sort 
     check_errors 
     triangle_types
   end
@@ -26,31 +26,31 @@ class Triangle
   end
 
   def is_triangle? 
-    @side_one + @side_two < @side_three
+    @first + @second < @third
   end
  
   def is_phitagorean?
-    @side_three ** TWO_DEGREES == @side_one ** TWO_DEGREES + @side_two ** TWO_DEGREES 
+    @third ** TWO_DEGREES == @first ** TWO_DEGREES + @second ** TWO_DEGREES 
   end
 
   def is_isosceles?
-    @side_one == @side_two || @side_one == @side_three || @side_two == @side_three
+    @first == @second || @first == @third || @second == @third
   end
 
   def is_equilateral? 
-    @side_two == @side_one && @side_two == @side_three 
+    @second == @first && @second == @third 
   end
 
   def check_errors
-     unless (@side_one.positive?) && (@side_two.positive? ) && (@side_three.positive? ) 
+     unless (@first.positive?) && (@second.positive? ) && (@third.positive? ) 
       raise ArgumentError.new('Every side have to be positive Number !!!') 
     end 
   end
 
 end
 
- side_one = gets.chomp.to_f
- side_two = gets.chomp.to_fm
- side_three = gets.chomp.to_f
+ first = gets.chomp.to_f
+ second = gets.chomp.to_fm
+ third = gets.chomp.to_f
  
- puts Triangle.new.sides(side_one, side_two, side_three)
+ puts Triangle.new.sides(first, second, third)
