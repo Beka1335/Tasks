@@ -3,7 +3,7 @@ require 'date'
 class Days
   def initialize(year, month, day)
     @year, @month, @day = year, month, day
-    check_errors
+    validate_date(@year, @month, @day)
   end
 
   def calculate
@@ -16,9 +16,13 @@ class Days
     end
   end
 
-  def is_zero?
-    @year.zero? || @month.zero? || @day.zero?
+  def validate_date(year, month, day)
+    if Date.valid_date?(year, month, day) == false
+      warn "#{year}-#{month}-#{day} Date is not valid!"
+      exit 1
+    end
   end
+
 end
   
 puts "Enter year"
