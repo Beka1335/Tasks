@@ -1,5 +1,3 @@
-OPTIMAL = 110
-
 class CalculateIdealWeight
   
   class AttributeError < StandardError; end
