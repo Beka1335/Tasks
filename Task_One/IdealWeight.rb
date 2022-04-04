@@ -1,6 +1,6 @@
 OPTIMAL = 110
 
-class IdealWeight
+class CalculateIdealWeight
   
   class AttributeError < StandardError; end
   SUBTRACTOR = 110
@@ -45,9 +45,9 @@ class IdealWeight
   end
 end
 
-idealweight = IdealWeight.new
+calculateidealweight = CalculateIdealWeight.new
 
-puts idealweight.call
+puts calculateidealweight.call
 
 
 
