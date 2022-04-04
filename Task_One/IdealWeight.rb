@@ -16,18 +16,22 @@ class CalculateIdealWeight
 
   def call
     validate
+    calculate_ideal_weight
     ideal_weight
   rescue AttributeError => error
     warn error
   end
 
   def ideal_weight
-    if @height.to_f - SUBTRACTOR <= EDGE
+    if @optimal_weight <= EDGE
       print "#{@name} Your weight is already optimal"
     else
-      optimal_weight = @height.to_f - OPTIMAL 
-      print "#{@name} Your optimal weight is #{optimal_weight}"
+      print "#{@name} Your optimal weight is #{@optimal_weight}"
     end
+  end
+
+  def calculate_ideal_weight
+    @optimal_weight = @height.to_f - SUBTRACTOR
   end
 
   def validate
@@ -37,15 +41,17 @@ class CalculateIdealWeight
       raise AttributeError, "#{@name.capitalize}, Height must be numbers"
     elsif @height.empty?
       raise AttributeError, "#{@name.capitalize}, height must not be nill"
-    else @height.to_f <= EDGE
+    elsif @height.to_f <= EDGE
       raise AttributeError, "#{@name.capitalize}, height must be positive number"
+    else
+      return
     end
   end
 end
 
-calculateidealweight = CalculateIdealWeight.new
 
-puts calculateidealweight.call
+
+puts CalculateIdealWeight.new.call
 
 
 
