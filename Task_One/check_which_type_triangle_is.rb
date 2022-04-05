@@ -1,12 +1,27 @@
-TWO_DEGREES = 2
+
 
 class Triangle 
+  class AttributeError < StandardError; end
+  TWO_DEGREES = 2
 
-  def sides(first, second, third)
+  def initialize
+    print "Enter First Side: "
+    first = gets.chomp
+    print "Enter second Side: "
+    second = gets.chomp
+    print "Enter third Side: "
+    third = gets.chomp
     @first, @second, @third = [first, second, third].sort 
-    check_errors 
-    triangle_types
   end
+
+  def call
+    validate 
+    triangle_types
+  rescue AttributeError => error
+    warn error
+  end
+
+  private
 
   def triangle_types 
   case 
@@ -41,16 +56,19 @@ class Triangle
     @second == @first && @second == @third 
   end
 
-  def check_errors
-     unless (@first.positive?) && (@second.positive? ) && (@third.positive? ) 
-      raise ArgumentError.new('Every side have to be positive Number !!!') 
-    end 
+  def validate
+    if @first.match(/\D/) || @second.match(/\D/) || @third.match(/\D/)
+      raise AttributeError, "sides must be numbers"
+    elsif @first.empty? || @second.empty? || @third.empty?
+      raise AttributeError, "sides must not be nill"
+    elsif @first.to_f.positive? || @second.to_f.positive? || @third.to_f.positive?
+      raise AttributeError, "Every side have to be positive Number !!!"
+    else
+      return
+    end
   end
-
 end
 
- first = gets.chomp.to_f
- second = gets.chomp.to_f
- third = gets.chomp.to_f
- 
- puts Triangle.new.sides(first, second, third)
+puts Triangle.new.call
+
+
