@@ -22,6 +22,8 @@ class CalculateIdealWeight
     warn error
   end
 
+  private
+
   def ideal_weight
     if @optimal_weight <= EDGE
       print "#{@name} Your weight is already optimal"
@@ -49,9 +51,6 @@ class CalculateIdealWeight
   end
 end
 
-
-
 puts CalculateIdealWeight.new.call
-
 
 
