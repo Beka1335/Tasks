@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 class CalculateIdealWeight
   class AttributeError < StandardError; end
   SUBTRACTOR = 110
 
   def initialize
-    print 'Enter Your Name: '
+    puts 'Enter Your Name: '
     @name = 'asd'.chomp
-    print 'Enter Your Height: '
+    puts 'Enter Your Height: '
     @height = '180'.chomp
   end
 
@@ -20,10 +22,10 @@ class CalculateIdealWeight
   private
 
   def detect_ideal_weight
-    if ideal_weight.zero?
-      print "#{@name} Your weight is already optimal"
+    if ideal_weight.positive?
+      puts "#{@name} Your optimal weight is #{@optimal_weight}"
     else
-      print "#{@name} Your optimal weight is #{@optimal_weight}"
+      puts "#{@name} Your weight is already optimal"
     end
   end
 
@@ -32,15 +34,15 @@ class CalculateIdealWeight
   end
 
   def validate
-      raise AttributeError, 'please enter your name' if @name.empty?
-    elsif @height.match(/\D/)
-      raise AttributeError, "#{@name.capitalize}, Height must be numbers"
-    elsif @height.empty?
-      raise AttributeError, "#{@name.capitalize}, height must not be nill"
-    end
+    raise AttributeError, 'please enter your name' if @name.empty?
+
+    raise AttributeError, "#{@name.capitalize}, Height must be numbers" if @height.match(/\D/)
+
+    raise AttributeError, "#{@name.capitalize}, height must not be nill" if @height.empty?
   end
 end
 
 puts CalculateIdealWeight.new.call
+
 
 
