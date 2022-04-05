@@ -1,6 +1,6 @@
 
 
-class Triangle 
+class Check_Triangle_Types 
   class AttributeError < StandardError; end
   TWO_DEGREES = 2
 
@@ -69,6 +69,6 @@ class Triangle
   end
 end
 
-puts Triangle.new.call
+puts Check_Triangle_Types.new.call
 
 
