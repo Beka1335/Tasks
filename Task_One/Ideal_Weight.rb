@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+ frozen_string_literal: true
 
 class CalculateIdealWeight
   class AttributeError < StandardError; end
@@ -23,14 +23,14 @@ class CalculateIdealWeight
 
   def detect_ideal_weight
     if ideal_weight.positive?
-      puts "#{@name} Your optimal weight is #{@optimal_weight}"
+      puts "#{@name} Your optimal weight is #{@ideal_weight}"
     else
       puts "#{@name} Your weight is already optimal"
     end
   end
 
   def ideal_weight
-    @optimal_weight = @height.to_f - SUBTRACTOR
+    @ideal_weight ||= @height.to_f - SUBTRACTOR
   end
 
   def validate
@@ -38,11 +38,10 @@ class CalculateIdealWeight
 
     raise AttributeError, "#{@name.capitalize}, Height must be numbers" if @height.match(/\D/)
 
-    raise AttributeError, "#{@name.capitalize}, height must not be nill" if @height.empty?
+    raise AttributeError, "#{@name.capitalize}, height must not be nill" if @height.to_s.empty?
   end
 end
 
 puts CalculateIdealWeight.new.call
-
 
 
