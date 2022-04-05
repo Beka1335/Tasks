@@ -16,11 +16,22 @@ class Purchase
         break
       end
       puts "Enter product price"
-      price = gets.chomp.to_f
+      price = gets.chomp
       puts "Enter product quantity"
-      quantity = gets.chomp.to_f
-      @purchase[name] = {price: price, quantity: quantity}
+      quantity = gets.chomp
+      @name = name
+      @price = price
+      @quantity = quantity
+      @purchase[name] = {price: price.to_f, quantity: quantity.to_f}
     end
+  end
+
+  def call
+    add_in_cart
+    validate
+    create_amount
+    product_quantity
+    price_sum
   end
 
   def create_amount
@@ -34,23 +45,32 @@ class Purchase
       if value == ZERO  
         "no product" 
       else 
-        puts "#{key} total amount is #{value}" 
+        puts "#{key} total amount is #{value}"  
       end}
   end
 
   def price_sum
     if @amount.values.sum == ZERO
-      "empty cart"
+      puts "empty cart"
     else
-      "total amount of all product is #{@amount.values.sum}" 
+      puts "total amount of all product is #{@amount.values.sum}" 
+    end
+  end
+  def validate
+    if @price.match(/\D/) || @quantity.match(/\D/)
+      raise AttributeError, "Price and Quantuty must be numbers"
+    elsif @price.empty? || @quantity.empty? || @name.empty?
+      raise AttributeError, "Price and Quantuty must not be nill"
+    elsif @price.to_f.negative? || @quantity.to_f.negative?
+      raise AttributeError, "Price and Quantuty have to be positive Number !!!"
+    else
+      return
     end
   end
 end
 
 prc = Purchase.new
 
+ prc.call
 
-prc.add_in_cart
-prc.create_amount
-prc.product_quantity
-puts prc.price_sum
+
