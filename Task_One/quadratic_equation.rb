@@ -1,12 +1,32 @@
-CONST = [2,4]
+
 
 class Quadratic
+	class AttributeError < StandardError; end
+	CONST = [2,4]
 
-	def equation(first_side, second_side, third_side)
-		@first_side, @second_side, @third_side = first_side, second_side, third_side
+	def initialize
+		print "Enter First Side: "
+    first = gets.chomp
+    print "Enter second Side: "
+    second = gets.chomp
+    print "Enter third Side: "
+		third = gets.chomp
+		@first = first
+		@second = second
+		@third =  third
+  end
 
+	def call
+		validate
+		equation
+  rescue AttributeError => error
+    	warn error
+  end
+
+	private
+	
+	def equation
 		@disc = find_disc
-
 		if @disc.negative?
 			puts "Discriminant is #{@disc}, No Roots"
 		else
@@ -18,24 +38,30 @@ class Quadratic
 				puts "Discriminant is #{@disc}, and Roots are #{first_root} and #{second_root}"
 			end
 		end
-
 	end
 
 	def find_disc
-		@second_side ** CONST.first - CONST.last * @first_side * @third_side
+		@second.to_f ** CONST.first - CONST.last * @first.to_f * @third.to_f
 	end
 
 	def find_root(disc, operation)
-		-@second_side.send(operation, Math.sqrt(disc)) / (CONST.first * @first_side)
+		-@second.to_f.send(operation, Math.sqrt(disc)) / (CONST.first * @first.to_f)
 	end
 
+	def validate
+    if @first.match(/\D/) || @second.match(/\D/) || @third.match(/\D/)
+      raise AttributeError, "sides must be numbers"
+    elsif @first.empty? || @second.empty? || @third.empty?
+      raise AttributeError, "sides must not be nill"
+    elsif @first.to_f.negative? || @second.to_f.negative? || @third.to_f.negative?
+     raise AttributeError, "Every side have to be positive Number !!!"
+    else
+      return
+    end
+  end
 end
-
-
-quadratic = Quadratic.new
-
-first_side = gets.chomp.to_f
-second_side = gets.chomp.to_f
-third_side = gets.chomp.to_f
  
- quadratic.equation(first_side, second_side, third_side)
+ puts Quadratic.new.call
+
+
+ 
