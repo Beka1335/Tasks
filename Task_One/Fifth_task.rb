@@ -1,10 +1,8 @@
 require 'date'
 
-
-class Year
+class Finde_Month_Whith_Inputed_Days_Amount
   class AttributeError < StandardError; end
   CONST = -1
-  #MONTH_DAY_AMOUNT = [28,29,30,31]
  
   def initialize
     puts "Enter Year: "
@@ -50,6 +48,6 @@ class Year
   end
 end
 
-puts Year.new.call
+puts Finde_Month_Whith_Inputed_Days_Amount.new.call
 
 
