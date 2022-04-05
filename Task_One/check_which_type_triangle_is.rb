@@ -1,5 +1,3 @@
-
-
 class Check_Triangle_Types 
   class AttributeError < StandardError; end
   TWO_DEGREES = 2
@@ -41,11 +39,15 @@ class Check_Triangle_Types
   end
 
   def is_triangle? 
-    @first + @second < @third
+    @first.to_f + @second.to_f < @third.to_f
   end
  
   def is_phitagorean?
-    @third ** TWO_DEGREES == @first ** TWO_DEGREES + @second ** TWO_DEGREES 
+    degree(@third.to_f) == degree(@first.to_f) + degree(@second.to_f)
+  end
+
+  def degree(side)
+    side ** TWO_DEGREES
   end
 
   def is_isosceles?
@@ -61,7 +63,7 @@ class Check_Triangle_Types
       raise AttributeError, "sides must be numbers"
     elsif @first.empty? || @second.empty? || @third.empty?
       raise AttributeError, "sides must not be nill"
-    elsif @first.to_f.positive? || @second.to_f.positive? || @third.to_f.positive?
+    elsif @first.to_f.negative? || @second.to_f.negative? || @third.to_f.negative?
       raise AttributeError, "Every side have to be positive Number !!!"
     else
       return
