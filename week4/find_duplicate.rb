@@ -18,6 +18,7 @@ class FindDuplicateInArray
   def fill_array
     loop do
       puts "\n When you end filling array 'stop'"
+      print "Enter Number :  "
       number = gets.chomp
       break if number == 'stop'
 
@@ -39,6 +40,6 @@ class FindDuplicateInArray
   end
 end
 
-p Find_Duplicate_in_array.new.call
+p FindDuplicateInArray.new.call
 
 
