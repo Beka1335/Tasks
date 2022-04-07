@@ -30,7 +30,7 @@ class FindLettersIndex
   end
 
   def validate
-    raise AttributeError, COMENTFORERROR if @letters.scan(REGEXSCANLETTERS)
+    raise AttributeError, COMENTFORERROR unless @letters.scan(REGEXSCANLETTERS)
   end
 end
 
