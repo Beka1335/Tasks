@@ -16,7 +16,7 @@ class CalculateFactorial
   def call
     validate
     count_factorial(@number.to_i)
-  rescue IntegerError => e
+  rescue AttributeError => e
     warn e
   end
 
@@ -38,3 +38,5 @@ class CalculateFactorial
 end
 
 puts CalculateFactorial.new.call
+
+
