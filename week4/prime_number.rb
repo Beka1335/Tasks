@@ -11,6 +11,7 @@ class PrimeNumber
   def call
     fill_array
     count_prime_numbers
+    sum_prime_numbers
   end
 
   private
@@ -32,6 +33,15 @@ class PrimeNumber
   def count_prime_numbers
     counted = @array.count { |number| is_prime?(number) }
     puts "there are #{counted} prime numbers"
+  end
+
+  def sum_prime_numbers
+    summarized_prime = finde_prime_number.sum
+    puts "this is sum of prime numbers in this array : #{summarized_prime}"
+  end
+
+  def finde_prime_number
+    @array.select { |number| is_prime?(number) }
   end
 
   def is_prime?(number)
