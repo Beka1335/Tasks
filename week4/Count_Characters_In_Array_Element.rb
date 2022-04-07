@@ -1,4 +1,4 @@
-class Count_Characters_In_Array_Element
+class CountCharactersInArrayElement
   PROGRAMING_LANGUAGES = ['Ruby', 'Python', 'Java', '.NET', 'HTML', 'JavaScript']
   
   def initialize
@@ -19,5 +19,5 @@ class Count_Characters_In_Array_Element
   end
 end
 
-programing_language = Count_Characters_In_Array_Element.new
+programing_language = CountCharactersInArrayElement.new
 puts programing_language.call
