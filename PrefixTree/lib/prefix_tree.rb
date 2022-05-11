@@ -1,16 +1,22 @@
 # frozen_string_literal: true
 
 require_relative '../lib/prefix_tree_node'
+require_relative '../lib/csv_controller'
 
+require 'csv'
+
+# qwer
 class PrefixTree
+  attr_accessor :root
+
   def initialize
     @root = PrefixTreeNode.new('')
-    @stack        = []
-    @words        = []
-    @prefix_stack = []
+    @dictionay = []
+    @csv_dictionary = Csv.new
   end
 
   def add_word(word)
+    @dictionay << word
     letters = word.chars
     base = @root
     letters.each { |letter| base = add_letter(letter, base.next) }
@@ -23,7 +29,6 @@ class PrefixTree
     base = @root
 
     found_word = letters.all? { |letter| base = find_character(letter, base.next) }
-
     yield found_word if block_given?
 
     base ? base.word : false
@@ -34,38 +39,30 @@ class PrefixTree
   end
 
   def list(prefix = nil)
-    if prefix == nil
-    else
-      @stack        << find_words_with_prefix(prefix)
-      @prefix_stack << prefix.chars.take(prefix.size - 1)
-      return [] unless @stack.first
-  
-      add_in_list
-      @words
-    end
+    prefix = '' if prefix.nil?
+    listlist(prefix)
   end
 
-  def delete(word)
-    letters = word.chars
-    base = @root
+  def delete_word(word)
+    @dictionay.delete(word)
+    delete_recursively(word, 0, root)
+  end
 
-    found_word = letters.all? { |letter| base = find_character(letter, base.next) }
+  def write_csv
+    @csv_dictionary.save_to_csv(list)
+  end
 
-    base.word = false
+  def read_csv
+    qwe = @csv_dictionary.read_from_csv
+    qwe.each { |_, word| add_word(word.to_s) }
   end
 
   private
 
-  def add_in_list
-    until @stack.empty?
-      node = @stack.pop
-      @prefix_stack.pop and next if node == :guard_node
-
-      @prefix_stack << node.value
-      @stack        << :guard_node
-      @words << @prefix_stack.join if node.word
-      node.next.each { |n| @stack << n }
-    end
+  def listlist(prefix)
+    result = []
+    @dictionay.each { |word| result << word if word.start_with?(prefix) }
+    result.length.zero? ? 'word is not in dictionary' : result
   end
 
   def add_letter(character, trie)
@@ -86,13 +83,46 @@ class PrefixTree
   def find_character(character, trie)
     trie.find { |n| n.value == character }
   end
+
+  def delete_each(current, char, should_delete_ref)
+    if should_delete_ref
+      current.children.delete(char)
+      current.children.length.zero?
+    end
+  end
+
+  def delete_recursively(word, index, root)
+    current = root
+
+    in_trie?(word, index, current)
+
+    char = word[index]
+    return false unless current.children.include?(char)
+
+    next_node = current.children[char]
+    should_delete_ref = delete_recursively(word, index + 1, next_node)
+
+    delete_each(current, char, should_delete_ref)
+    false
+  end
+
+  def in_trie?(word, index, current)
+    if index == word.length
+      return false unless current.is_end
+
+      current.is_end = false
+      current.children.length.zero?
+    end
+  end
 end
 
 trie = PrefixTree.new
-trie.add_word('cat')
-trie.add_word('caps')
-trie.add_word('cattle')
-puts trie.find_word('ca')
+#trie.read_csv
+ trie.add_word('cat')
+ trie.add_word('caps')
+ trie.add_word('cattle')
+puts trie.find_word('caps')
 puts trie.includes?('ca')
-trie.delete('cattle')
-p trie.list('cat')
+# trie.delete_word('cattle')
+# trie.write_csv
+puts trie.list()
