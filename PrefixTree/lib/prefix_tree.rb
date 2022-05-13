@@ -2,10 +2,8 @@
 
 require_relative '../lib/prefix_tree_node'
 require_relative '../lib/csv_controller'
-
 require 'csv'
 
-# qwer
 class PrefixTree
   attr_accessor :root
 
@@ -20,7 +18,7 @@ class PrefixTree
     letters = word.chars
     base = @root
     letters.each { |letter| base = add_letter(letter, base.next) }
-
+puts "you added #{word} sucsesfuly"
     base.word = true
   end
 
@@ -117,12 +115,12 @@ class PrefixTree
 end
 
 trie = PrefixTree.new
-#trie.read_csv
+# trie.read_csv
  trie.add_word('cat')
- trie.add_word('caps')
- trie.add_word('cattle')
-puts trie.find_word('caps')
-puts trie.includes?('ca')
+# trie.add_word('caps')
+# trie.add_word('cattle')
+# puts trie.find_word('caps')
+# puts trie.includes?('ca')
 # trie.delete_word('cattle')
 # trie.write_csv
-puts trie.list()
+ puts trie.list()

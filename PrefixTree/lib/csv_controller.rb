@@ -1,8 +1,6 @@
 # frozen_string_literal: true
-
 require 'csv'
 
-# qwe
 class Csv
   attr_accessor :path
 

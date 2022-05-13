@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# qwe
 class PrefixTreeNode
   attr_reader   :value, :next
   attr_accessor :is_end, :children, :word
